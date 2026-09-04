@@ -3,16 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Trading Padre — A Beginner's Guide to On-Chain Trading with Padre Terminal</title>
-<meta name="description" content="New to on-chain trading? Learn how Padre Terminal works, what fee cashback means, and how to place your first trade safely — step by step.">
-<meta property="og:title" content="Trading Padre — A Beginner's Guide to Padre Terminal">
-<meta property="og:description" content="Step-by-step onboarding for first-time users of Padre Terminal, plus a side-by-side look at how it compares to a typical exchange.">
+<title>Trading Padre — Trade Faster on Padre Terminal, 35% Fee Cashback</title>
+<meta name="description" content="An independent guide and referral page for Padre Terminal — a self-custody, multi-chain trading terminal. Get 35% fee cashback, ~300ms execution, and full control of your keys.">
+<meta property="og:title" content="Trading Padre — Trade Faster on Padre Terminal">
+<meta property="og:description" content="Self-custody trading across 4 networks. ~300ms execution. 35% fee cashback via this referral link.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Trading Padre">
 <meta property="og:url" content="https://tradingpadre.com/">
 <link rel="canonical" href="https://tradingpadre.com/">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-96.png" type="image/png" sizes="96x96">
+<meta name="google-site-verification" content="POGiYeZeYSzNx3EKrPTzhZaajpFVyDINWeUtnzXv9es" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -23,171 +24,236 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0B0E17;
-    --panel:#121729;
-    --panel-2:#171E33;
-    --line:#262E48;
-    --text:#EDEFF7;
-    --muted:#8A90AC;
-    --gold:#86EFAC;
-    --gold-dim: rgba(134,239,172,0.12);
-    --teal:#4FD1C5;
-    --brand-green:#86EFAC;
-    --down:#FB7185;
+    --bg:#070A08;
+    --panel:#0F1712;
+    --panel-2:#131E17;
+    --line:#1D2820;
+    --ink:#F2F7F4;
+    --muted:#8FA096;
+    --accent:#86EFAC;
+    --accent-2:#3FCB78;
+    --accent-dim: rgba(134,239,172,0.10);
+    --warn:#FB8D8D;
+    --maxw:1180px;
     --radius:16px;
-    --maxw:1140px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
-  body{
-    background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.6;
-    -webkit-font-smoothing:antialiased; position:relative;
-  }
-  body::before{
-    content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
-    background:
-      radial-gradient(600px 380px at 90% -8%, rgba(134,239,172,0.09), transparent 60%),
-      radial-gradient(560px 420px at 0% 10%, rgba(79,209,197,0.07), transparent 60%);
-  }
-  h1,h2,h3{font-family:'Sora',sans-serif;}
-  .mono{font-family:'IBM Plex Mono',monospace;}
+  body{background:var(--bg); color:var(--ink); font-family:'Inter',sans-serif; line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;}
+  h1,h2,h3{font-family:'Manrope',sans-serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
   a{color:inherit; text-decoration:none;}
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
-  ::selection{background:var(--gold); color:#04150F;}
+  ::selection{background:var(--accent); color:#04150F;}
+  img{max-width:100%; display:block;}
 
-  header{position:sticky; top:0; z-index:50; background:rgba(11,14,23,0.82); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);}
+  /* header */
+  header{position:sticky; top:0; z-index:60; background:rgba(7,10,8,0.82); backdrop-filter:blur(14px); border-bottom:1px solid var(--line);}
   nav{display:flex; align-items:center; justify-content:space-between; height:66px;}
-  .logo{display:flex; align-items:center; gap:10px; font-weight:700; font-size:17px; font-family:'Sora',sans-serif;}
-  .logo-mark{width:26px; height:26px; flex-shrink:0;}
-  .logo-mark svg{width:100%; height:100%; display:block;}
+  .brand svg{height:21px; width:auto; display:block;}
   .nav-links{display:flex; gap:28px; font-size:14px; color:var(--muted);}
-  .nav-links a:hover{color:var(--text);}
-  .nav-right{display:flex; align-items:center; gap:10px;}
-  .nav-cta{background:var(--gold); color:#04150F; font-weight:700; font-size:14px; padding:10px 18px; border-radius:9px; white-space:nowrap;}
+  .nav-links a:hover{color:var(--ink);}
   .nav-mobile-hide{display:flex;}
-  .hamburger{display:none; align-items:center; justify-content:center; width:36px; height:36px; border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--text); cursor:pointer;}
-  .hamburger svg{width:17px; height:17px;}
-  .hamburger.open{border-color:var(--gold); color:var(--gold);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .nav-cta{background:var(--accent); color:#04150F; font-weight:700; font-size:13.5px; padding:10px 18px; border-radius:8px; white-space:nowrap;}
+  .hamburger{display:none; align-items:center; justify-content:center; width:34px; height:34px; border-radius:8px; border:1px solid var(--line); background:transparent; color:var(--ink); cursor:pointer;}
+  .hamburger svg{width:16px; height:16px;}
+  .hamburger.open{border-color:var(--accent); color:var(--accent);}
   .mobile-panel{display:none; flex-direction:column; padding:6px 0 14px; border-top:1px solid var(--line);}
   .mobile-panel.open{display:flex;}
-  .mobile-panel a{padding:12px 4px; font-size:15px; color:var(--muted); border-bottom:1px solid var(--line);}
-  .mobile-panel a:hover{color:var(--gold);}
-  @media(max-width:800px){ .nav-mobile-hide{display:none;} .hamburger{display:flex;} }
-  @media(max-width:480px){
-    .wrap{padding:0 16px;} nav{height:58px;}
-    .logo{font-size:14px;} .logo-mark{width:20px; height:20px;}
-    .nav-cta{padding:7px 12px; font-size:12px;} .hamburger{width:30px; height:30px;}
-  }
+  .mobile-panel a{padding:12px 4px; font-size:14.5px; color:var(--muted); border-bottom:1px solid var(--line);}
+  .mobile-panel a:hover{color:var(--accent);}
+  @media(max-width:840px){ .nav-mobile-hide{display:none;} .hamburger{display:flex;} }
+  @media(max-width:460px){ .wrap{padding:0 16px;} nav{height:56px;} .brand svg{height:17px;} .nav-cta{padding:7px 12px; font-size:12px;} .hamburger{width:30px; height:30px;} }
 
   /* hero */
-  .hero{padding:64px 0 48px;}
-  .hero-inner{max-width:720px;}
-  .eyebrow{
-    display:inline-flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:12px;
-    color:var(--gold); background:var(--gold-dim); border:1px solid rgba(134,239,172,0.3); padding:6px 12px; border-radius:100px; margin-bottom:20px;
+  .hero{position:relative; padding:64px 0 20px; overflow:hidden;}
+  .hero::before{
+    content:""; position:absolute; width:640px; height:640px; border-radius:50%; right:-220px; top:-260px;
+    background:radial-gradient(circle, rgba(134,239,172,0.14), transparent 70%); pointer-events:none;
   }
-  .hero h1{font-size:clamp(30px,4.6vw,48px); line-height:1.12; letter-spacing:-0.02em; font-weight:800; margin-bottom:18px;}
-  .hero h1 .hl{color:var(--gold);}
-  .hero p.sub{font-size:16.5px; color:var(--muted); max-width:580px; margin-bottom:30px;}
-  .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:8px;}
+  .hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:52px; align-items:center; position:relative;}
+  @media(max-width:940px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-grid > div:first-child{text-align:center;}
+    .hero p.sub{margin-left:auto; margin-right:auto;}
+    .cta-row{justify-content:center;}
+    .trust-row{justify-content:center;}
+  }
+
+  .pill{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--accent);
+    background:var(--accent-dim); border:1px solid rgba(134,239,172,0.25); padding:7px 14px; border-radius:100px; margin-bottom:22px;
+  }
+  .pill .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 8px var(--accent);}
+
+  h1.hero-h{font-size:clamp(34px,5vw,56px); font-weight:800; line-height:1.06; letter-spacing:-0.02em; margin-bottom:20px;}
+  h1.hero-h .grad{background:linear-gradient(100deg, var(--accent), #C8F7DB); -webkit-background-clip:text; background-clip:text; color:transparent;}
+  .hero p.sub{font-size:17px; color:#B8C4BC; max-width:480px; margin-bottom:30px;}
+
+  .cta-row{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:30px;}
   .btn-primary{
-    display:inline-flex; align-items:center; gap:8px; background:var(--gold); color:#04150F; font-weight:700; font-size:15px;
-    padding:14px 26px; border-radius:10px; box-shadow:0 14px 30px -12px rgba(134,239,172,0.45); transition:transform .15s ease;
+    background:var(--accent); color:#04150F; font-weight:700; font-size:15px; padding:14px 26px; border-radius:10px;
+    box-shadow:0 16px 32px -14px rgba(134,239,172,0.5); transition:transform .15s ease;
   }
   .btn-primary:hover{transform:translateY(-2px);}
-  .btn-ghost{border:1px solid var(--line); color:var(--text); font-weight:600; font-size:14.5px; padding:13px 22px; border-radius:10px;}
-  .btn-ghost:hover{border-color:#3a4468;}
-  .hero-note{font-size:13px; color:var(--muted); margin-top:10px;}
+  .btn-ghost{border:1px solid var(--line); color:var(--ink); font-weight:600; font-size:14.5px; padding:13px 22px; border-radius:10px;}
+  .btn-ghost:hover{border-color:#354235;}
 
-  /* stat strip */
-  .stat-strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--panel);}
-  .stat-strip .wrap{display:grid; grid-template-columns:repeat(4,1fr); padding:26px 24px;}
-  .stat-strip .cell{text-align:center; padding:0 8px; border-right:1px solid var(--line);}
-  .stat-strip .cell:last-child{border-right:none;}
-  .stat-strip .v{font-family:'IBM Plex Mono',monospace; font-size:22px; font-weight:600; color:var(--gold);}
-  .stat-strip .l{font-size:11.5px; color:var(--muted); margin-top:4px;}
-  @media(max-width:700px){ .stat-strip .wrap{grid-template-columns:repeat(2,1fr); gap:18px 0;} .stat-strip .cell{border-right:none; border-bottom:1px solid var(--line); padding-bottom:14px;} .stat-strip .cell:nth-child(2n){border-right:none;} }
+  .trust-row{display:flex; flex-wrap:wrap; gap:18px; padding-top:22px; border-top:1px solid var(--line);}
+  .trust-row .t{display:flex; align-items:center; gap:7px; font-size:13px; color:var(--muted);}
+  .trust-row svg{width:15px; height:15px; stroke:var(--accent); flex-shrink:0;}
 
-  section{padding:76px 0;}
-  .sec-head{max-width:600px; margin-bottom:44px;}
-  .sec-eyebrow{display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--teal); margin-bottom:14px; letter-spacing:0.05em;}
-  .sec-eyebrow::before{content:""; width:20px; height:1px; background:var(--teal); opacity:0.7;}
-  .sec-head h2{font-size:clamp(24px,3.2vw,34px); letter-spacing:-0.02em; margin-bottom:12px;}
-  .sec-head p{color:var(--muted); font-size:15.5px;}
-
-  /* timeline */
-  .timeline{display:flex; flex-direction:column; gap:0;}
-  .tl-item{display:grid; grid-template-columns:64px 1fr; gap:20px; position:relative; padding-bottom:36px;}
-  .tl-item:last-child{padding-bottom:0;}
-  .tl-marker{
-    width:44px; height:44px; border-radius:12px; background:var(--panel); border:1px solid var(--line);
-    display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-weight:600; color:var(--gold); font-size:15px;
-    position:relative; z-index:1; flex-shrink:0;
+  /* mockup panel */
+  .mockup{position:relative;}
+  .mockup-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    box-shadow:0 40px 80px -30px rgba(0,0,0,0.7);
   }
-  .tl-item:not(:last-child)::before{
-    content:""; position:absolute; left:21px; top:44px; bottom:-8px; width:2px; background:var(--line);
+  .mockup-tabs{display:flex; gap:2px; padding:12px 14px 0; border-bottom:1px solid var(--line); background:var(--panel-2);}
+  .mockup-tabs span{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted); padding:8px 12px; border-bottom:2px solid transparent;}
+  .mockup-tabs span.active{color:var(--accent); border-bottom-color:var(--accent);}
+  .mockup-body{padding:18px 18px 20px;}
+  .mp-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;}
+  .mp-pair{display:flex; align-items:center; gap:10px;}
+  .mp-icon{width:28px; height:28px; border-radius:50%; background:linear-gradient(145deg,var(--accent),#1F7A4A);}
+  .mp-name{font-weight:700; font-size:14px;}
+  .mp-sub{font-size:11px; color:var(--muted); font-family:'JetBrains Mono',monospace;}
+  .mp-price{color:var(--accent); font-family:'JetBrains Mono',monospace; font-weight:600; font-size:14px;}
+  .mp-chart{height:130px; margin:4px 0 14px;}
+  .mp-chart svg{width:100%; height:100%;}
+  .mp-stats{display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  .mp-stats div{background:var(--panel-2); border:1px solid var(--line); border-radius:8px; padding:9px 10px;}
+  .mp-stats .l{font-size:10px; color:var(--muted); margin-bottom:3px;}
+  .mp-stats .v{font-family:'JetBrains Mono',monospace; font-size:12.5px; font-weight:600;}
+  .float-badge{
+    position:absolute; right:-14px; top:-14px; background:var(--panel); border:1px solid var(--accent);
+    border-radius:12px; padding:12px 16px; box-shadow:0 20px 40px -16px rgba(0,0,0,0.6);
   }
-  .tl-body h3{font-size:17px; margin-bottom:8px; font-weight:600;}
-  .tl-body p{color:var(--muted); font-size:14.5px; max-width:520px;}
+  .float-badge .v{font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700; color:var(--accent);}
+  .float-badge .l{font-size:10.5px; color:var(--muted); margin-top:1px;}
+  @media(max-width:460px){ .float-badge{right:0; top:-10px; padding:9px 12px;} .float-badge .v{font-size:16px;} }
 
-  /* comparison table */
-  .comp-table{width:100%; border-collapse:collapse; background:var(--panel); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
-  .comp-table th, .comp-table td{padding:16px 18px; text-align:left; font-size:14px; border-bottom:1px solid var(--line);}
-  .comp-table th{font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--muted); font-weight:500; background:var(--panel-2); letter-spacing:0.03em;}
-  .comp-table td.highlight{color:var(--gold); font-weight:600;}
-  .comp-table tr:last-child td{border-bottom:none;}
-  .comp-table td:first-child{color:var(--muted); font-family:'IBM Plex Mono',monospace; font-size:13px;}
+  /* network strip */
+  .net-strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:22px 0; margin-top:48px;}
+  .net-strip .wrap{display:flex; align-items:center; justify-content:center; gap:36px; flex-wrap:wrap;}
+  .net-strip .lbl{font-size:12.5px; color:var(--muted); margin-right:6px;}
+  .net-item{display:flex; align-items:center; gap:8px; font-size:14px; font-weight:600; color:#D3DCD6;}
+  .net-dot{width:8px; height:8px; border-radius:50%;}
+
+  section{padding:88px 0;}
+  .sec-head{max-width:600px; margin:0 auto 48px; text-align:center;}
+  .sec-head.left{text-align:left; margin:0 0 44px;}
+  .sec-head h2{font-size:clamp(26px,3.6vw,38px); font-weight:800; letter-spacing:-0.02em; margin-bottom:14px;}
+  .sec-head p{color:var(--muted); font-size:16px;}
+
+  /* feature grid */
+  .feat-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media(max-width:900px){ .feat-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:600px){ .feat-grid{grid-template-columns:1fr;} }
+  .feat-card{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:26px 24px; position:relative; overflow:hidden;
+    transition:border-color .2s ease, transform .2s ease;
+  }
+  .feat-card:hover{border-color:#2c3a2f; transform:translateY(-3px);}
+  .feat-card .spark{position:absolute; right:0; bottom:0; width:120px; height:60px; opacity:0.5;}
+  .feat-icon{width:38px; height:38px; border-radius:10px; background:var(--accent-dim); display:flex; align-items:center; justify-content:center; margin-bottom:18px; position:relative;}
+  .feat-icon svg{width:18px; height:18px; stroke:var(--accent);}
+  .feat-card h3{font-size:16.5px; font-weight:700; margin-bottom:8px; position:relative;}
+  .feat-card p{color:var(--muted); font-size:14px; position:relative;}
+
+  /* trenches spotlight */
+  .spotlight{
+    background:linear-gradient(150deg, #0D1712, #0A0F0C 65%); border:1px solid var(--line); border-radius:22px;
+    padding:52px; display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:center; position:relative; overflow:hidden;
+  }
+  @media(max-width:860px){
+    .spotlight{grid-template-columns:1fr; padding:34px 26px; text-align:center;}
+    .spotlight p{margin-left:auto; margin-right:auto;}
+    .flow{align-items:center;}
+    .flow-item{text-align:left; max-width:320px; margin:0 auto;}
+  }
+  .spotlight h2{font-size:clamp(24px,3.4vw,32px); font-weight:800; margin-bottom:16px; letter-spacing:-0.01em;}
+  .spotlight p{color:var(--muted); font-size:15px; margin-bottom:24px; max-width:440px;}
+  .flow{display:flex; flex-direction:column; gap:0;}
+  .flow-item{display:flex; align-items:center; gap:16px; padding:14px 0;}
+  .flow-node{
+    width:12px; height:12px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); flex-shrink:0;
+  }
+  .flow-item:not(:last-child){position:relative;}
+  .flow-item:not(:last-child)::after{content:""; position:absolute; left:5.5px; top:36px; bottom:-14px; width:1px; background:var(--line);}
+  .flow-text b{display:block; font-size:14.5px; font-weight:700;}
+  .flow-text span{font-size:12.5px; color:var(--muted);}
+
+  /* trust badges */
+  .badge-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+  @media(max-width:860px){ .badge-grid{grid-template-columns:repeat(2,1fr);} }
+  .badge-cell{background:var(--panel); padding:26px 22px;}
+  .badge-cell .bi{width:32px; height:32px; border-radius:8px; background:var(--accent-dim); display:flex; align-items:center; justify-content:center; margin-bottom:14px;}
+  .badge-cell .bi svg{width:16px; height:16px; stroke:var(--accent);}
+  .badge-cell h3{font-size:14.5px; font-weight:700; margin-bottom:6px;}
+  .badge-cell p{font-size:12.5px; color:var(--muted);}
+
+  /* cashback */
+  .cashback{
+    background:linear-gradient(120deg, #0F241A, #0A0F0C 70%); border:1px solid rgba(134,239,172,0.25); border-radius:22px;
+    padding:56px; display:grid; grid-template-columns:1.2fr 0.8fr; gap:40px; align-items:center; position:relative; overflow:hidden;
+  }
+  @media(max-width:800px){
+    .cashback{grid-template-columns:1fr; padding:36px 26px; text-align:center;}
+    .cashback p{margin-left:auto; margin-right:auto;}
+  }
+  .cashback h2{font-size:clamp(24px,3.4vw,34px); font-weight:800; margin-bottom:14px;}
+  .cashback p{color:var(--muted); margin-bottom:24px; max-width:420px;}
+  .big-num{font-family:'JetBrains Mono',monospace; font-size:clamp(64px,9vw,104px); font-weight:700; color:var(--accent); line-height:1; text-align:center; text-shadow:0 0 44px rgba(134,239,172,0.4);}
+  .big-num-l{text-align:center; color:var(--muted); font-size:13px; margin-top:8px;}
+
+  /* compare */
+  .spec{width:100%; border-collapse:collapse; background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden;}
+  .spec th{text-align:left; font-size:12px; color:var(--muted); font-weight:600; padding:16px 18px; background:var(--panel-2); border-bottom:1px solid var(--line);}
+  .spec td{padding:15px 18px; border-bottom:1px solid var(--line); font-size:14px;}
+  .spec tr:last-child td{border-bottom:none;}
+  .spec td:first-child{color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:12.5px;}
+  .spec td.yes{color:var(--accent); font-weight:600;}
   .table-scroll{overflow-x:auto;}
-  @media(max-width:640px){ .comp-table{font-size:13px;} .comp-table th, .comp-table td{padding:12px 14px;} }
-
-  /* feature list alt */
-  .feat-list{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;}
-  @media(max-width:700px){ .feat-list{grid-template-columns:1fr;} }
-  .feat-list .item{background:var(--panel); padding:26px 24px; display:flex; gap:16px;}
-  .feat-list .num{font-family:'IBM Plex Mono',monospace; color:var(--teal); font-size:13px; flex-shrink:0; padding-top:2px;}
-  .feat-list h3{font-size:15.5px; margin-bottom:6px; font-weight:600;}
-  .feat-list p{color:var(--muted); font-size:13.5px;}
+  @media(max-width:600px){ .spec{font-size:13px;} .spec td, .spec th{padding:12px 14px;} }
 
   /* faq */
   .faq-item{border-bottom:1px solid var(--line); padding:20px 0;}
-  .faq-q{display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:600; font-size:15px;}
-  .faq-q:hover{color:var(--gold);}
+  .faq-q{display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-weight:600; font-size:15.5px;}
+  .faq-q:hover{color:var(--accent);}
   .faq-q .plus{color:var(--muted); font-size:19px; transition:transform .2s; margin-left:16px; flex-shrink:0;}
-  .faq-item.open .plus{transform:rotate(45deg); color:var(--gold);}
+  .faq-item.open .plus{transform:rotate(45deg); color:var(--accent);}
   .faq-a{max-height:0; overflow:hidden; transition:max-height .25s ease;}
-  .faq-a p{color:var(--muted); font-size:14px; padding-top:12px; max-width:600px;}
+  .faq-a p{color:var(--muted); font-size:14px; padding-top:12px; max-width:640px;}
 
   /* final cta */
-  .final-cta{position:relative; overflow:hidden; text-align:center; background:var(--panel); border:1px solid var(--line); border-radius:20px; padding:56px 24px;}
-  .final-cta::before{content:""; position:absolute; width:440px; height:220px; left:50%; top:-120px; transform:translateX(-50%); background:radial-gradient(ellipse, rgba(134,239,172,0.15), transparent 70%); pointer-events:none;}
-  .final-cta h2{font-size:clamp(24px,3.6vw,36px); margin-bottom:14px; position:relative;}
-  .final-cta p{color:var(--muted); margin-bottom:28px; position:relative; max-width:480px; margin-left:auto; margin-right:auto;}
+  .final-cta{position:relative; overflow:hidden; text-align:center; background:var(--panel); border:1px solid var(--line); border-radius:22px; padding:60px 24px;}
+  .final-cta::before{content:""; position:absolute; width:460px; height:230px; left:50%; top:-130px; transform:translateX(-50%); background:radial-gradient(ellipse, rgba(134,239,172,0.16), transparent 70%); pointer-events:none;}
+  .final-cta h2{font-size:clamp(26px,4vw,38px); font-weight:800; margin-bottom:14px; position:relative;}
+  .final-cta p{color:var(--muted); margin-bottom:28px; position:relative; max-width:440px; margin-left:auto; margin-right:auto;}
 
-  footer{border-top:1px solid var(--line); padding:40px 0 60px; color:var(--muted); font-size:13px;}
-  footer .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-bottom:24px; align-items:flex-start;}
-  .disclaimer{border-top:1px solid var(--line); padding-top:20px; font-size:12.5px; line-height:1.75; color:#5C6485;}
+  footer{border-top:1px solid var(--line); padding:44px 0 60px;}
+  .foot-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-bottom:26px; align-items:flex-start;}
+  footer .foot-grid svg{height:19px; width:auto;}
+  footer .disclaimer{font-size:12.5px; line-height:1.75; color:#5E6D62; border-top:1px solid var(--line); padding-top:20px;}
+  footer .disclaimer strong{color:#8FA096;}
 
-  .sticky-cta{
-    position:fixed; bottom:0; left:0; right:0; z-index:60; background:rgba(11,14,23,0.94); backdrop-filter:blur(10px);
-    border-top:1px solid var(--line); padding:12px 16px; display:none; align-items:center; justify-content:space-between; gap:12px;
-  }
-  .sticky-cta .txt{font-size:12.5px;} .sticky-cta .txt b{display:block; font-size:14px;} .sticky-cta .txt span{color:var(--muted);}
-  .sticky-cta a{background:var(--gold); color:#04150F; font-weight:700; font-size:13.5px; padding:10px 18px; border-radius:9px; white-space:nowrap;}
-  @media(max-width:700px){ .sticky-cta{display:flex;} body{padding-bottom:70px;} }
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important;} }
 </style>
-<meta name="google-site-verification" content="POGiYeZeYSzNx3EKrPTzhZaajpFVyDINWeUtnzXv9es" />
 </head>
 <body>
 
 <header>
   <div class="wrap">
     <nav>
-      <a href="#top" class="logo" style="height:24px; align-items:center;">
-        <svg viewBox="0 0 460 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Terminal logo" style="height:22px; width:auto; display:block;">
-          <g clip-path="url(#clipNavTP)">
+      <a href="#top" class="brand" aria-label="Home">
+        <svg viewBox="0 0 460 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g clip-path="url(#hlogo)">
             <path d="M111.18 24.9642V15.8462H154.259L148.422 24.9642H138.201V68.1539H127.239V24.9642H111.18Z" fill="#86EFAC"/>
             <path d="M157.173 68.1539V15.8462H192.518V24.9642H168.264V37.4282H190.699V46.5463H168.264V59.0358H192.62V68.1539H157.173Z" fill="#86EFAC"/>
             <path d="M198.449 68.1539V15.8462H219.142C223.104 15.8462 226.485 16.5528 229.285 17.9661C232.103 19.3623 234.245 21.346 235.713 23.917C237.199 26.4711 237.942 29.4765 237.942 32.933C237.942 36.4065 237.191 39.3949 235.688 41.8978C234.186 44.3838 232.008 46.2909 229.157 47.619C226.322 48.9471 222.891 49.6112 218.861 49.6112H205.005V40.723H217.068C219.185 40.723 220.944 40.4335 222.344 39.8546C223.745 39.2756 224.786 38.4073 225.469 37.2494C226.169 36.0915 226.519 34.6528 226.519 32.933C226.519 31.1963 226.169 29.7319 225.469 28.54C224.786 27.3481 223.736 26.4456 222.319 25.8326C220.919 25.2026 219.151 24.8877 217.017 24.8877H209.538V68.1539H198.449ZM226.775 44.3498L239.811 68.1539H227.57L214.814 44.3498H226.775Z" fill="#86EFAC"/>
@@ -200,11 +266,12 @@
             <path d="M12.4455 49.9567C10.1821 53.4357 7.52669 61.7278 15.0121 67.0642" stroke="#86EFAC" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3.62 7.23 12.06 7.23"/>
             <path d="M66.3158 5.36013C76.0084 13.4933 77.273 27.9446 69.1404 37.6376L40.462 71.8151L40.0761 72.2641C31.8782 81.546 17.7253 82.6454 8.18383 74.6391L7.73629 74.2532C-1.54562 66.0552 -2.64564 51.9031 5.36064 42.3617L34.0391 8.18404C42.1725 -1.50815 56.623 -2.77263 66.3158 5.36013ZM21.6579 32.5119L10.0743 46.3169C4.12538 53.4064 5.0497 63.9764 12.139 69.9255C19.2287 75.8744 29.7994 74.9496 35.7483 67.8599L47.3319 54.0551L21.6579 32.5119ZM62.3606 10.0738C55.2711 4.12539 44.7016 5.05031 38.7527 12.1392L26.8169 26.3637L52.491 47.9068L64.4268 33.6823C70.3751 26.5927 69.4499 16.0226 62.3606 10.0738Z" fill="#86EFAC"/>
           </g>
-          <defs><clipPath id="clipNavTP"><rect width="460" height="80" fill="white"/></clipPath></defs>
+          <defs><clipPath id="hlogo"><rect width="460" height="80" fill="white"/></clipPath></defs>
         </svg>
       </a>
       <div class="nav-links nav-mobile-hide">
-        <a href="#how-it-works">How It Works</a>
+        <a href="#features">Features</a>
+        <a href="#trenches">Trenches</a>
         <a href="#compare">Compare</a>
         <a href="#faq">FAQ</a>
       </div>
@@ -216,7 +283,8 @@
       </div>
     </nav>
     <div class="mobile-panel" id="mobilePanel">
-      <a href="#how-it-works">How It Works</a>
+      <a href="#features">Features</a>
+      <a href="#trenches">Trenches</a>
       <a href="#compare">Compare</a>
       <a href="#faq">FAQ</a>
     </div>
@@ -226,63 +294,159 @@
 <main id="top">
   <section class="hero">
     <div class="wrap">
-      <div class="hero-inner">
-        <div class="eyebrow">A GUIDE FOR FIRST-TIME USERS</div>
-        <h1>New to on-chain trading? <span class="hl">Start here</span> before you connect a wallet.</h1>
-        <p class="sub">This page walks through what Padre Terminal actually is, how the fee cashback works, and how it stacks up against a typical exchange — so your first trade isn't a guessing game.</p>
-        <div class="cta-row">
-          <a class="btn-primary" href="/go/" target="_blank" rel="noopener sponsored">Open Padre Terminal →</a>
-          <a class="btn-ghost" href="#how-it-works">See how it works</a>
+      <div class="hero-grid">
+        <div>
+          <div class="pill"><span class="dot"></span>Independent referral guide</div>
+          <h1 class="hero-h">Trade on-chain,<br><span class="grad">keep your keys.</span></h1>
+          <p class="sub">Padre Terminal is a self-custody trading terminal across Solana, Ethereum, Base, and BNB Chain — no account, no deposit, no one holding your funds. This link gets you 35% of your trading fees back, automatically.</p>
+          <div class="cta-row">
+            <a class="btn-primary" href="/go/" target="_blank" rel="noopener sponsored">Open Padre Terminal</a>
+            <a class="btn-ghost" href="#features">See what's inside</a>
+          </div>
+          <div class="trust-row">
+            <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Self-custody, always</div>
+            <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 4v16h16"/><path d="m6 15 4-5 4 3 5-7"/></svg>Referral disclosed</div>
+            <div class="t"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>~300ms execution</div>
+          </div>
         </div>
-        <div class="hero-note">No signup form on this page — the link above takes you straight to the terminal.</div>
+
+        <div class="mockup">
+          <div class="float-badge"><div class="v mono">35%</div><div class="l">fee cashback</div></div>
+          <div class="mockup-card">
+            <div class="mockup-tabs">
+              <span class="active">Trade</span><span>Trenches</span><span>Wallets</span><span>Portfolio</span>
+            </div>
+            <div class="mockup-body">
+              <div class="mp-row">
+                <div class="mp-pair">
+                  <div class="mp-icon"></div>
+                  <div><div class="mp-name">SOL / USDC</div><div class="mp-sub">Solana · Deep liquidity</div></div>
+                </div>
+                <div class="mp-price">+18.42%</div>
+              </div>
+              <div class="mp-chart"><svg viewBox="0 0 400 150" preserveAspectRatio="none" aria-hidden="true"><g id="candles"></g></svg></div>
+              <div class="mp-stats">
+                <div><div class="l">24h Vol</div><div class="v">$4.2M</div></div>
+                <div><div class="l">Cashback</div><div class="v" style="color:var(--accent);">+0.08 SOL</div></div>
+                <div><div class="l">Slippage</div><div class="v">0.4%</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="net-strip">
+      <div class="wrap">
+        <span class="lbl">Trade across</span>
+        <div class="net-item"><span class="net-dot" style="background:#9945FF;"></span>Solana</div>
+        <div class="net-item"><span class="net-dot" style="background:#627EEA;"></span>Ethereum</div>
+        <div class="net-item"><span class="net-dot" style="background:#0052FF;"></span>Base</div>
+        <div class="net-item"><span class="net-dot" style="background:#F0B90B;"></span>BNB Chain</div>
       </div>
     </div>
   </section>
 
-  <div class="stat-strip">
-    <div class="wrap">
-      <div class="cell"><div class="v mono">4</div><div class="l">Networks supported</div></div>
-      <div class="cell"><div class="v mono">~300ms</div><div class="l">Typical execution time</div></div>
-      <div class="cell"><div class="v mono">35%</div><div class="l">Fee cashback via this link</div></div>
-      <div class="cell"><div class="v mono">$0</div><div class="l">Cost to connect a wallet</div></div>
-    </div>
-  </div>
-
-  <section id="how-it-works">
+  <section id="features">
     <div class="wrap">
       <div class="sec-head">
-        <div class="sec-eyebrow">GETTING STARTED</div>
-        <h2>Four steps, no prior experience required.</h2>
-        <p>This is the same order most first-time users go through — skipping steps is usually where people run into avoidable problems.</p>
+        <h2>Everything the terminal gives you</h2>
+        <p>Built for traders placing their first on-chain trade and traders placing their thousandth.</p>
       </div>
-      <div class="timeline">
-        <div class="tl-item">
-          <div class="tl-marker">01</div>
-          <div class="tl-body">
-            <h3>Install a wallet for the network you plan to use</h3>
-            <p>Phantom or Solflare for Solana; MetaMask or Rabby for Ethereum, Base, or BNB Chain. Pick one — you don't need every network on day one.</p>
-          </div>
+      <div class="feat-grid">
+        <div class="feat-card">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M4 4v16h16"/><path d="m6 15 4-5 4 3 5-7"/></svg></div>
+          <h3>Market &amp; Limit Orders</h3>
+          <p>Buy and sell at market speed, or set a limit price and let it fill automatically while you're away.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-marker">02</div>
-          <div class="tl-body">
-            <h3>Connect it to the terminal</h3>
-            <p>This only shares your public address — never your seed phrase. Any prompt asking for your seed phrase at this stage is not legitimate.</p>
-          </div>
+        <div class="feat-card">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg></div>
+          <h3>Inferno Mode</h3>
+          <p>One-click execution tuned for the first seconds of a new listing or migration, when timing matters most.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-marker">03</div>
-          <div class="tl-body">
-            <h3>Set a session password and enable 2FA</h3>
-            <p>Encryption happens client-side — there's no "forgot password" recovery through support, so treat it like a wallet password.</p>
-          </div>
+        <div class="feat-card">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <h3>Client-Side Encryption</h3>
+          <p>Your private key is encrypted on your device with a password only you set. The operating team can't see it.</p>
         </div>
-        <div class="tl-item">
-          <div class="tl-marker">04</div>
-          <div class="tl-body">
-            <h3>Fund your wallet and place a small first trade</h3>
-            <p>Keep a small gas buffer separate from your trade amount. A small test trade confirms everything's wired up before you size up.</p>
-          </div>
+        <div class="feat-card">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M17 8 7 16M7 8h10v10"/></svg></div>
+          <h3>Wallet Copy Trading</h3>
+          <p>Follow a wallet's buys and sells and mirror its strategy automatically, in real time.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg></div>
+          <h3>Multi-Chain, One Login</h3>
+          <p>Switch between Solana, Ethereum, Base and BNB Chain in the same interface — no separate app per network.</p>
+        </div>
+        <div class="feat-card">
+          <div class="feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M9 18h6"/></svg></div>
+          <h3>Install Straight From Browser</h3>
+          <p>No app store listing needed — install the terminal to your home screen as a progressive web app.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="trenches">
+    <div class="wrap">
+      <div class="spotlight">
+        <div>
+          <h2>Find new tokens before they migrate.</h2>
+          <p>Trenches tracks every token still on a bonding curve — the earliest, most volatile stage — across three stages, with holder concentration, dev wallet holdings, and same-slot trade detection built in.</p>
+          <a class="btn-primary" href="/go/" target="_blank" rel="noopener sponsored">Open Trenches</a>
+        </div>
+        <div class="flow">
+          <div class="flow-item"><div class="flow-node"></div><div class="flow-text"><b>New</b><span>Just launched, earliest and most volatile stage</span></div></div>
+          <div class="flow-item"><div class="flow-node"></div><div class="flow-text"><b>Almost Bonded</b><span>Nearing the end of the bonding curve</span></div></div>
+          <div class="flow-item"><div class="flow-node"></div><div class="flow-text"><b>Recently Bonded</b><span>Just migrated to a full liquidity pool</span></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Built to keep your keys yours</h2>
+        <p>The self-custody model in four points.</p>
+      </div>
+      <div class="badge-grid">
+        <div class="badge-cell">
+          <div class="bi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>Non-Custodial</h3>
+          <p>Funds stay in your wallet at every step — the terminal never takes custody.</p>
+        </div>
+        <div class="badge-cell">
+          <div class="bi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+          <h3>Client-Side Encryption</h3>
+          <p>Session security lives on your device, locked behind a password only you know.</p>
+        </div>
+        <div class="badge-cell">
+          <div class="bi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 12h6M12 9v6"/><circle cx="12" cy="12" r="9"/></svg></div>
+          <h3>No Sign-Up Form</h3>
+          <p>Connecting a wallet replaces the account-creation step entirely.</p>
+        </div>
+        <div class="badge-cell">
+          <div class="bi"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 2 3 7v6c0 5 4 9 9 9s9-4 9-9V7l-9-5Z"/></svg></div>
+          <h3>Referral Disclosed</h3>
+          <p>This page discloses its referral link plainly — see the footer for the full terms.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="cashback">
+        <div>
+          <h2>Get paid to trade, from trade one.</h2>
+          <p>No minimum volume, no token to hold. Every filled order sends fee cashback straight to your wallet in SOL, automatically.</p>
+          <a class="btn-primary" href="/go/" target="_blank" rel="noopener sponsored">Activate Cashback</a>
+        </div>
+        <div>
+          <div class="big-num">35%</div>
+          <div class="big-num-l">FEE CASHBACK PER TRADE</div>
         </div>
       </div>
     </div>
@@ -291,47 +455,19 @@
   <section id="compare">
     <div class="wrap">
       <div class="sec-head">
-        <div class="sec-eyebrow">HOW IT DIFFERS</div>
-        <h2>Padre Terminal vs. a typical centralized exchange</h2>
-        <p>Neither model is strictly "better" — they trade off custody, speed, and asset coverage differently.</p>
+        <h2>How it compares to a typical exchange</h2>
+        <p>Neither model wins outright — the trade-offs run in opposite directions.</p>
       </div>
       <div class="table-scroll">
-        <table class="comp-table">
-          <tr><th>Detail</th><th>Padre Terminal</th><th>Typical CEX</th></tr>
-          <tr><td>Custody of funds</td><td class="highlight">Self-custody (your wallet)</td><td>Exchange holds your funds</td></tr>
-          <tr><td>Sign-up process</td><td class="highlight">Connect wallet, no form</td><td>Account + ID verification</td></tr>
-          <tr><td>Asset coverage</td><td>New on-chain tokens, early listings</td><td class="highlight">Larger, pre-vetted asset list</td></tr>
-          <tr><td>Execution speed</td><td class="highlight">~300ms typical</td><td>Varies by order book depth</td></tr>
-          <tr><td>Fee rebate program</td><td class="highlight">Up to 35% via referral</td><td>Usually tied to holding a native token</td></tr>
-          <tr><td>Withdrawal process</td><td class="highlight">None needed — funds stay in your wallet</td><td>Manual withdrawal request</td></tr>
+        <table class="spec">
+          <tr><th>Detail</th><th>Padre Terminal</th><th>Typical exchange</th></tr>
+          <tr><td>Custody</td><td class="yes">You hold the keys</td><td>Exchange holds your funds</td></tr>
+          <tr><td>Getting in</td><td class="yes">Connect a wallet</td><td>Account, ID verification</td></tr>
+          <tr><td>Getting out</td><td class="yes">Nothing to request</td><td>Manual withdrawal</td></tr>
+          <tr><td>Asset coverage</td><td>New, early-stage tokens</td><td class="yes">Larger, pre-vetted list</td></tr>
+          <tr><td>Execution</td><td class="yes">~300ms typical</td><td>Depends on order book</td></tr>
+          <tr><td>Fee rebate</td><td class="yes">Up to 35% via referral</td><td>Often tied to a native token</td></tr>
         </table>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="wrap">
-      <div class="sec-head">
-        <div class="sec-eyebrow">WORTH KNOWING</div>
-        <h2>A few things beginners usually ask about.</h2>
-      </div>
-      <div class="feat-list">
-        <div class="item">
-          <div class="num">01</div>
-          <div><h3>Self-custody means no recovery button</h3><p>If you lose access to your wallet, there's no support ticket that gets it back — the trade-off for not needing anyone's permission to trade.</p></div>
-        </div>
-        <div class="item">
-          <div class="num">02</div>
-          <div><h3>Slippage tolerance isn't a bug</h3><p>Wider slippage settings exist specifically because early-stage tokens move fast — it's a deliberate trade-off, not a default you should ignore.</p></div>
-        </div>
-        <div class="item">
-          <div class="num">03</div>
-          <div><h3>Liquidity depth matters more than price</h3><p>A token can look cheap and still be a bad trade if there isn't enough liquidity to exit the position later.</p></div>
-        </div>
-        <div class="item">
-          <div class="num">04</div>
-          <div><h3>Cashback lowers cost, not risk</h3><p>The 35% fee rebate reduces what you pay to trade — it doesn't offset a losing position, and it's not a reason to trade more than planned.</p></div>
-        </div>
       </div>
     </div>
   </section>
@@ -339,25 +475,32 @@
   <section id="faq">
     <div class="wrap">
       <div class="sec-head">
-        <div class="sec-eyebrow">FAQ</div>
-        <h2>Quick answers before you start.</h2>
+        <h2>Questions before you start</h2>
       </div>
-      <div class="faq-list">
+      <div style="max-width:720px; margin:0 auto;">
         <div class="faq-item">
           <div class="faq-q">Is this the official Padre Terminal site? <span class="plus">+</span></div>
-          <div class="faq-a"><p>No — this is an independent guide page that links to the official terminal through a referral code. See the disclosure below for details.</p></div>
+          <div class="faq-a"><p>No — this is an independent referral page that links to the official terminal through a referral code. See the disclosure in the footer.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">Do I need to sign up on this page? <span class="plus">+</span></div>
-          <div class="faq-a"><p>No account or form here — the link takes you directly to the terminal, where you connect a wallet instead of creating a login.</p></div>
+          <div class="faq-q">Do I need to sign up here? <span class="plus">+</span></div>
+          <div class="faq-a"><p>No account or form — the link takes you directly to the terminal, where you connect a wallet instead of creating a login.</p></div>
         </div>
         <div class="faq-item">
-          <div class="faq-q">What does "Padre" vs "Terminal" mean?</div>
-          <div class="faq-a"><p>The platform was rebranded from Padre to Terminal after being acquired by Pump.fun in October 2025. Same trading engine and self-custody model, new name.</p></div>
+          <div class="faq-q">Is "Padre" the same as "Terminal"? <span class="plus">+</span></div>
+          <div class="faq-a"><p>Yes. The platform was renamed from Padre to Terminal after Pump.fun's acquisition in October 2025 — same engine and self-custody model, new name and ownership.</p></div>
         </div>
         <div class="faq-item">
           <div class="faq-q">Does the 35% cashback cost anything extra? <span class="plus">+</span></div>
-          <div class="faq-a"><p>No — it's a rebate on the fee you'd already pay per trade, credited automatically to your wallet in SOL. There's no separate cost to unlock it.</p></div>
+          <div class="faq-a"><p>No — it's a rebate on the fee you'd already pay per trade, credited automatically in SOL.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What if I lose access to my wallet? <span class="plus">+</span></div>
+          <div class="faq-a"><p>Recovery depends entirely on your wallet provider's own backup method — the terminal never held your funds, so it has no separate recovery flow.</p></div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can I trade on more than one network? <span class="plus">+</span></div>
+          <div class="faq-a"><p>Yes — Solana, Ethereum, Base, and BNB Chain are all available from the same login. Most people start with one and add others later.</p></div>
         </div>
       </div>
     </div>
@@ -366,9 +509,9 @@
   <section>
     <div class="wrap">
       <div class="final-cta">
-        <h2>Ready for your first trade?</h2>
-        <p>Connect a wallet and place a small test order — the fee rebate applies automatically from trade one.</p>
-        <a class="btn-primary" href="/go/" target="_blank" rel="noopener sponsored">Open Padre Terminal →</a>
+        <h2>Ready to trade faster?</h2>
+        <p>Connect a wallet and place your first order — cashback applies automatically, from trade one.</p>
+        <a class="btn-primary" href="/go/" target="_blank" rel="noopener sponsored">Open Padre Terminal</a>
       </div>
     </div>
   </section>
@@ -377,38 +520,61 @@
 <footer>
   <div class="wrap">
     <div class="foot-grid">
-      <div class="logo" style="height:22px; align-items:center;">
-        <svg viewBox="0 0 460 80" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Terminal logo" style="height:20px; width:auto; display:block;">
-          <g clip-path="url(#clipFootTP)">
-            <path d="M111.18 24.9642V15.8462H154.259L148.422 24.9642H138.201V68.1539H127.239V24.9642H111.18Z" fill="#86EFAC"/>
-            <path d="M157.173 68.1539V15.8462H192.518V24.9642H168.264V37.4282H190.699V46.5463H168.264V59.0358H192.62V68.1539H157.173Z" fill="#86EFAC"/>
-            <path d="M198.449 68.1539V15.8462H219.142C223.104 15.8462 226.485 16.5528 229.285 17.9661C232.103 19.3623 234.245 21.346 235.713 23.917C237.199 26.4711 237.942 29.4765 237.942 32.933C237.942 36.4065 237.191 39.3949 235.688 41.8978C234.186 44.3838 232.008 46.2909 229.157 47.619C226.322 48.9471 222.891 49.6112 218.861 49.6112H205.005V40.723H217.068C219.185 40.723 220.944 40.4335 222.344 39.8546C223.745 39.2756 224.786 38.4073 225.469 37.2494C226.169 36.0915 226.519 34.6528 226.519 32.933C226.519 31.1963 226.169 29.7319 225.469 28.54C224.786 27.3481 223.736 26.4456 222.319 25.8326C220.919 25.2026 219.151 24.8877 217.017 24.8877H209.538V68.1539H198.449ZM226.775 44.3498L239.811 68.1539H227.57L214.814 44.3498H226.775Z" fill="#86EFAC"/>
-            <path d="M245.639 15.8462H259.316L273.762 50.9904H274.375L288.821 15.8462H302.498V68.1539H291.741V34.1079H291.305L277.731 67.8985H270.406L256.832 33.9802H256.397V68.1539H245.639V15.8462Z" fill="#86EFAC"/>
-            <path d="M319.416 15.8462V68.1539H308.327V15.8462H319.416Z" fill="#86EFAC"/>
-            <path d="M369.117 15.8462V68.1539H359.538L336.718 35.2317H336.334V68.1539H325.245V15.8462H334.977L357.618 48.7428H358.079V15.8462H369.117Z" fill="#86EFAC"/>
-            <path d="M383.916 68.1539H372.032L390.14 15.8462H404.431L422.513 68.1539H410.629L397.489 27.7993H397.08L383.916 68.1539Z" fill="#86EFAC"/>
-            <path d="M425.427 68.1539V15.8462H436.517V59.0358H459.005V68.1539H425.427Z" fill="#86EFAC"/>
-            <path d="M19.7001 25.2716L54.8013 54.725L40.4621 71.8139C32.3288 81.5068 17.8777 82.7711 8.18477 74.6377C-1.50821 66.5044 -2.77252 52.0533 5.36086 42.3604L19.7001 25.2716Z" fill="#86EFAC" fill-opacity="0.4"/>
-            <path d="M12.4455 49.9567C10.1821 53.4357 7.52669 61.7278 15.0121 67.0642" stroke="#86EFAC" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3.62 7.23 12.06 7.23"/>
-            <path d="M66.3158 5.36013C76.0084 13.4933 77.273 27.9446 69.1404 37.6376L40.462 71.8151L40.0761 72.2641C31.8782 81.546 17.7253 82.6454 8.18383 74.6391L7.73629 74.2532C-1.54562 66.0552 -2.64564 51.9031 5.36064 42.3617L34.0391 8.18404C42.1725 -1.50815 56.623 -2.77263 66.3158 5.36013ZM21.6579 32.5119L10.0743 46.3169C4.12538 53.4064 5.0497 63.9764 12.139 69.9255C19.2287 75.8744 29.7994 74.9496 35.7483 67.8599L47.3319 54.0551L21.6579 32.5119ZM62.3606 10.0738C55.2711 4.12539 44.7016 5.05031 38.7527 12.1392L26.8169 26.3637L52.491 47.9068L64.4268 33.6823C70.3751 26.5927 69.4499 16.0226 62.3606 10.0738Z" fill="#86EFAC"/>
-          </g>
-          <defs><clipPath id="clipFootTP"><rect width="460" height="80" fill="white"/></clipPath></defs>
-        </svg>
-      </div>
-      <div style="max-width:460px;">An independent beginner's guide for the Padre Terminal on-chain trading platform (trade.padre.gg). Links on this page use a referral code.</div>
+      <svg viewBox="0 0 460 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#flogo)">
+          <path d="M111.18 24.9642V15.8462H154.259L148.422 24.9642H138.201V68.1539H127.239V24.9642H111.18Z" fill="#86EFAC"/>
+          <path d="M157.173 68.1539V15.8462H192.518V24.9642H168.264V37.4282H190.699V46.5463H168.264V59.0358H192.62V68.1539H157.173Z" fill="#86EFAC"/>
+          <path d="M198.449 68.1539V15.8462H219.142C223.104 15.8462 226.485 16.5528 229.285 17.9661C232.103 19.3623 234.245 21.346 235.713 23.917C237.199 26.4711 237.942 29.4765 237.942 32.933C237.942 36.4065 237.191 39.3949 235.688 41.8978C234.186 44.3838 232.008 46.2909 229.157 47.619C226.322 48.9471 222.891 49.6112 218.861 49.6112H205.005V40.723H217.068C219.185 40.723 220.944 40.4335 222.344 39.8546C223.745 39.2756 224.786 38.4073 225.469 37.2494C226.169 36.0915 226.519 34.6528 226.519 32.933C226.519 31.1963 226.169 29.7319 225.469 28.54C224.786 27.3481 223.736 26.4456 222.319 25.8326C220.919 25.2026 219.151 24.8877 217.017 24.8877H209.538V68.1539H198.449ZM226.775 44.3498L239.811 68.1539H227.57L214.814 44.3498H226.775Z" fill="#86EFAC"/>
+          <path d="M245.639 15.8462H259.316L273.762 50.9904H274.375L288.821 15.8462H302.498V68.1539H291.741V34.1079H291.305L277.731 67.8985H270.406L256.832 33.9802H256.397V68.1539H245.639V15.8462Z" fill="#86EFAC"/>
+          <path d="M319.416 15.8462V68.1539H308.327V15.8462H319.416Z" fill="#86EFAC"/>
+          <path d="M369.117 15.8462V68.1539H359.538L336.718 35.2317H336.334V68.1539H325.245V15.8462H334.977L357.618 48.7428H358.079V15.8462H369.117Z" fill="#86EFAC"/>
+          <path d="M383.916 68.1539H372.032L390.14 15.8462H404.431L422.513 68.1539H410.629L397.489 27.7993H397.08L383.916 68.1539Z" fill="#86EFAC"/>
+          <path d="M425.427 68.1539V15.8462H436.517V59.0358H459.005V68.1539H425.427Z" fill="#86EFAC"/>
+          <path d="M19.7001 25.2716L54.8013 54.725L40.4621 71.8139C32.3288 81.5068 17.8777 82.7711 8.18477 74.6377C-1.50821 66.5044 -2.77252 52.0533 5.36086 42.3604L19.7001 25.2716Z" fill="#86EFAC" fill-opacity="0.4"/>
+          <path d="M12.4455 49.9567C10.1821 53.4357 7.52669 61.7278 15.0121 67.0642" stroke="#86EFAC" stroke-width="1.8" stroke-linecap="round" stroke-dasharray="3.62 7.23 12.06 7.23"/>
+          <path d="M66.3158 5.36013C76.0084 13.4933 77.273 27.9446 69.1404 37.6376L40.462 71.8151L40.0761 72.2641C31.8782 81.546 17.7253 82.6454 8.18383 74.6391L7.73629 74.2532C-1.54562 66.0552 -2.64564 51.9031 5.36064 42.3617L34.0391 8.18404C42.1725 -1.50815 56.623 -2.77263 66.3158 5.36013ZM21.6579 32.5119L10.0743 46.3169C4.12538 53.4064 5.0497 63.9764 12.139 69.9255C19.2287 75.8744 29.7994 74.9496 35.7483 67.8599L47.3319 54.0551L21.6579 32.5119ZM62.3606 10.0738C55.2711 4.12539 44.7016 5.05031 38.7527 12.1392L26.8169 26.3637L52.491 47.9068L64.4268 33.6823C70.3751 26.5927 69.4499 16.0226 62.3606 10.0738Z" fill="#86EFAC"/>
+        </g>
+        <defs><clipPath id="flogo"><rect width="460" height="80" fill="white"/></clipPath></defs>
+      </svg>
+      <div style="max-width:440px; font-size:13px; color:var(--muted);">An independent referral page for the Padre Terminal on-chain trading platform (trade.padre.gg).</div>
     </div>
     <div class="disclaimer">
-      <strong>Referral disclosure:</strong> This page (tradingpadre.com) is an independent content page and is not an official channel of, endorsed by, or operated by Padre / Terminal / trade.padre.gg. Links on this page include a referral code; the page operator may earn a commission when you sign up through it. Trading digital assets carries risk of loss; please do your own research and only trade with funds you can afford to lose.
+      <strong>Referral disclosure:</strong> tradingpadre.com is an independent content page and is not an official channel of, endorsed by, or operated by Padre, Terminal, or trade.padre.gg. Links on this page include a referral code; the page operator may earn a commission when you sign up through one. Trading digital assets carries risk of loss — do your own research and only trade with funds you can afford to lose.
     </div>
   </div>
 </footer>
 
-<div class="sticky-cta">
-  <div class="txt"><b>35% fee cashback via this link</b><span>No signup form — connect a wallet directly</span></div>
-  <a href="/go/" target="_blank" rel="noopener sponsored">Open →</a>
-</div>
-
 <script>
+(function(){
+  var g = document.getElementById('candles');
+  if(!g) return;
+  var ns = "http://www.w3.org/2000/svg";
+  var x = 4, w = 400, prev = 90;
+  var bars = 22, bw = (w - 8) / bars - 3;
+  for(var i=0;i<bars;i++){
+    var dir = Math.random() > 0.42 ? 1 : -1;
+    var body = 6 + Math.random()*22;
+    var top = prev - (dir>0? body*0.7 : body*0.3);
+    var bottom = prev + (dir>0? body*0.3 : body*0.7);
+    var wickTop = top - Math.random()*10;
+    var wickBottom = bottom + Math.random()*10;
+    var color = dir>0 ? "#86EFAC" : "#FB8D8D";
+    var cx = x + bw/2;
+    var wick = document.createElementNS(ns,"line");
+    wick.setAttribute("x1",cx); wick.setAttribute("x2",cx);
+    wick.setAttribute("y1",Math.max(6,wickTop)); wick.setAttribute("y2",Math.min(144,wickBottom));
+    wick.setAttribute("stroke",color); wick.setAttribute("stroke-width","1.3");
+    g.appendChild(wick);
+    var rect = document.createElementNS(ns,"rect");
+    rect.setAttribute("x",x); rect.setAttribute("width",bw);
+    rect.setAttribute("y",Math.min(top,bottom)); rect.setAttribute("height",Math.max(2,Math.abs(bottom-top)));
+    rect.setAttribute("fill",color); rect.setAttribute("rx","1");
+    g.appendChild(rect);
+    prev = dir>0 ? top : bottom;
+    x += bw + 3;
+  }
+})();
+
 (function(){
   var btn = document.getElementById('menuBtn');
   var panel = document.getElementById('mobilePanel');
@@ -419,9 +585,7 @@
     btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   });
   panel.querySelectorAll('a').forEach(function(a){
-    a.addEventListener('click', function(){
-      panel.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false');
-    });
+    a.addEventListener('click', function(){ panel.classList.remove('open'); btn.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
   });
 })();
 
@@ -430,9 +594,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
   var a = item.querySelector('.faq-a');
   q.addEventListener('click', function(){
     var isOpen = item.classList.contains('open');
-    document.querySelectorAll('.faq-item.open').forEach(function(o){
-      o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = null;
-    });
+    document.querySelectorAll('.faq-item.open').forEach(function(o){ o.classList.remove('open'); o.querySelector('.faq-a').style.maxHeight = null; });
     if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 20 + 'px'; }
   });
 });
